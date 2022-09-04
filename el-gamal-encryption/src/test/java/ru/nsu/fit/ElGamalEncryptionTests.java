@@ -15,7 +15,7 @@ public class ElGamalEncryptionTests {
         this.bob = new Client("Bob");
     }
 
-    public void checkEncryption(int originalMessage) {
+    private void checkEncryption(int originalMessage) {
         Pair<Integer, Integer> aliceCiphertext = alice.encryptMessage(originalMessage, bob.getPublicKey());
 
         /* Алиса отправляет Бобу шифртекст. Боб получает данную пару */
