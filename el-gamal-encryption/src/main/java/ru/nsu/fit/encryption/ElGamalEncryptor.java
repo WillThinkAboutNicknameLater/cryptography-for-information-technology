@@ -1,6 +1,5 @@
-package ru.nsu.fit;
+package ru.nsu.fit.encryption;
 
-import org.apache.commons.lang3.tuple.Pair;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ru.nsu.fit.util.MathHelper;
@@ -33,7 +32,7 @@ public class ElGamalEncryptor {
         return publicKey;
     }
 
-    public Pair<Integer, Integer> encrypt(int message, int publicKeyOfCompanion) {
+    public Ciphertext encrypt(int message, int publicKeyOfCompanion) {
         if (message < 0 || message >= p) {
             throw new IllegalArgumentException("Invalid message value. Message must be within [0, " + p + ")");
         }
@@ -41,20 +40,20 @@ public class ElGamalEncryptor {
         logger.debug("Encrypting the original message: {}", message);
 
         int k = Randomizer.generateNumber(1, p - 2);
-        Integer r = MathHelper.pow(g, k, p);
-        Integer e = (message * MathHelper.pow(publicKeyOfCompanion, k, p)) % p;
-        Pair<Integer, Integer> ciphertext = Pair.of(r, e);
+        int r = MathHelper.pow(g, k, p);
+        int e = (message * MathHelper.pow(publicKeyOfCompanion, k, p)) % p;
+        Ciphertext ciphertext = new Ciphertext(r, e);
 
         logger.debug("Got the ciphertext: {}", ciphertext);
 
         return ciphertext;
     }
 
-    public int decrypt(Pair<Integer, Integer> ciphertext, int privateKey) {
+    public int decrypt(Ciphertext ciphertext, int privateKey) {
         logger.debug("Decrypting the ciphertext: {}", ciphertext);
 
-        int r = ciphertext.getLeft();
-        int e = ciphertext.getRight();
+        int r = ciphertext.getR();
+        int e = ciphertext.getE();
         int decryptedMessage = (e * MathHelper.pow(r, p - 1 - privateKey, p)) % p;
 
         logger.debug("Got the decrypted message: {}", decryptedMessage);

@@ -1,8 +1,9 @@
 package ru.nsu.fit;
 
-import org.apache.commons.lang3.tuple.Pair;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import ru.nsu.fit.encryption.Ciphertext;
+import ru.nsu.fit.encryption.ElGamalEncryptor;
 
 public class Client {
     private final Logger logger;
@@ -23,13 +24,13 @@ public class Client {
         return publicKey;
     }
 
-    public Pair<Integer, Integer> encryptMessage(int message, int publicKeyOfCompanion) {
+    public Ciphertext encryptMessage(int message, int publicKeyOfCompanion) {
         logger.info("Encrypting the message from {}", username);
 
         return encryptor.encrypt(message, publicKeyOfCompanion);
     }
 
-    public int decryptMessage(Pair<Integer, Integer> ciphertext) {
+    public int decryptMessage(Ciphertext ciphertext) {
         logger.info("Decrypting the ciphertext for {}", username);
 
         return encryptor.decrypt(ciphertext, privateKey);

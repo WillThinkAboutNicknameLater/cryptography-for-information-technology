@@ -1,9 +1,9 @@
 package ru.nsu.fit;
 
-import org.apache.commons.lang3.tuple.Pair;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import ru.nsu.fit.encryption.Ciphertext;
 
 public class ElGamalEncryptionTests {
     private Client alice;
@@ -16,11 +16,11 @@ public class ElGamalEncryptionTests {
     }
 
     private void checkEncryption(int originalMessage) {
-        Pair<Integer, Integer> aliceCiphertext = alice.encryptMessage(originalMessage, bob.getPublicKey());
+        Ciphertext aliceCiphertext = alice.encryptMessage(originalMessage, bob.getPublicKey());
 
         /* Алиса отправляет Бобу шифртекст. Боб получает данную пару */
 
-        Pair<Integer, Integer> bobCiphertext = Pair.of(aliceCiphertext);
+        Ciphertext bobCiphertext = new Ciphertext(aliceCiphertext);
 
         int decryptedMessage = bob.decryptMessage(bobCiphertext);
 
