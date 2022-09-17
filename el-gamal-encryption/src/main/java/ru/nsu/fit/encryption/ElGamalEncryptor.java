@@ -16,7 +16,7 @@ public class ElGamalEncryptor {
         this.g = 2;
     }
 
-    public int generatePrivateKey() {
+    private int generatePrivateKey() {
         int privateKey = Randomizer.generateNumber(2, p - 2);
 
         logger.debug("Generating the private key: {}", privateKey);
@@ -24,12 +24,18 @@ public class ElGamalEncryptor {
         return privateKey;
     }
 
-    public int generatePublicKey(int privateKey) {
+    private int generatePublicKey(int privateKey) {
         int publicKey = MathHelper.pow(g, privateKey, p);
 
         logger.debug("Generating the public key: {}", publicKey);
 
         return publicKey;
+    }
+
+    public CipherKeys generateCipherKeys() {
+        int privateKey = generatePrivateKey();
+        int publicKey = generatePublicKey(privateKey);
+        return new CipherKeys(privateKey, publicKey);
     }
 
     public Ciphertext encrypt(int message, int publicKeyOfCompanion) {
