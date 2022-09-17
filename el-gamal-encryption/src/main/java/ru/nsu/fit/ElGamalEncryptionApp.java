@@ -25,8 +25,6 @@ public class ElGamalEncryptionApp {
     }
 
     public static void main(String[] args) {
-        /* Тесты см. в src.test.java.ru.nsu.fit.ElGamalEncryptionTests */
-
         try (Scanner scanner = new Scanner(System.in)) {
             int message = scanner.nextInt();
             logger.info("Result of encryption: {}", checkEncryption(message));
