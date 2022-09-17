@@ -7,13 +7,13 @@ public class Randomizer {
 
     private Randomizer() {}
 
-    public static int generateNumber(int from, int to) {
-        if (from > to) {
+    public static int generateNumber(int from, int through) {
+        if (from > through) {
             int oldFrom = from;
-            from = to;
-            to = oldFrom;
+            from = through;
+            through = oldFrom;
         }
 
-        return from + random.nextInt(to - from + 1);
+        return from + random.nextInt(through - from + 1);
     }
 }
