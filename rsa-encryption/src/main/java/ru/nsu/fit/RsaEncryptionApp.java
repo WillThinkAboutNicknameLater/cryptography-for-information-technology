@@ -14,7 +14,7 @@ public class RsaEncryptionApp {
 
         int encryptedMessage = alice.encryptMessage(originalMessage, bob);
 
-        /* Алиса отправляет Бобу шифртекст. Боб получает данную пару */
+        /* Алиса отправляет Бобу зашифрованное сообщение. Боб получает данное сообщение */
 
         int decryptedMessage = bob.decryptMessage(encryptedMessage);
 
