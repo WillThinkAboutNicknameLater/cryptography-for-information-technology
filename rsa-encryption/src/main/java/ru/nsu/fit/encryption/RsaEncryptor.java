@@ -22,7 +22,7 @@ public class RsaEncryptor {
         return keys;
     }
 
-    public int encrypt(int message, int moduloOfCompanion, int publicKeyOfCompanion) {
+    public int encrypt(int message, int publicKeyOfCompanion, int moduloOfCompanion) {
         if (message < 0 || message >= moduloOfCompanion) {
             throw new IllegalArgumentException("Invalid message value. Message must be within [0, " + moduloOfCompanion + ")");
         }

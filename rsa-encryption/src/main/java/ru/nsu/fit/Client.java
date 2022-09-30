@@ -31,7 +31,7 @@ public class Client {
     public int encryptMessage(int message, Client companion) {
         logger.info("Encrypting the message from {}", username);
 
-        return encryptor.encrypt(message, companion.getModulo(), companion.getPublicKey());
+        return encryptor.encrypt(message, companion.getPublicKey(), companion.getModulo());
     }
 
     public int decryptMessage(int encryptedMessage) {
